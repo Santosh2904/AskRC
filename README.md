@@ -47,6 +47,9 @@ The repository will contain a `README` file, which includes essential project in
 ### Folder Structure
 The repository will follow this structure:
 
+![Alt text]("/Users/aksharareddypatlannagari/Documents/Screenshots/Screenshot 2024-09-30 at 3.08.00 PM.png")
+
+
 - **askRC (root directory):** Contains the main project components.
   - **airflow:** Configurations and DAGs for workflow automation.
   - **azure:** Infrastructure scripts and logic apps specific to Azure services.
