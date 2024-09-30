@@ -7,13 +7,12 @@
    - [Data Card](#22-data-card)
    - [Data Sources](#23-data-sources)
    - [Data Rights and Privacy](#24-data-rights-and-privacy)
-3. [Data Planning and Splits](#3-data-planning-and-splits)
-4. [GitHub Repository](#4-github-repository)
+3. [GitHub Repository](#3-github-repository)
    - [Folder Structure](#folder-structure)
-5. [Project Scope](#5-project-scope)
-   - [Problems](#51-problems)
-   - [Current Solutions](#52-current-solutions)
-   - [Proposed Solutions](#53-proposed-solutions)
+4. [Project Scope](#4-project-scope)
+   - [Problems](#41-problems)
+   - [Current Solutions](#42-current-solutions)
+   - [Proposed Solutions](#43-proposed-solutions)
 
 ## 1. Introduction
 The Research Computing Department at Northeastern University offers numerous resources to researchers, yet these offerings are underutilized due to a lack of awareness. This project aims to develop a **Retrieval-Augmented Generation (RAG)** chatbot to address these issues by providing an interactive platform where users can ask questions and receive relevant, informative responses based on existing documentation.
@@ -42,14 +41,7 @@ The dataset will primarily come from the **Research Computing Department's websi
 ### 2.4 Data Rights and Privacy
 All public data on the Research Computing Department's website is eligible for educational use per Northeastern University's data policies. The project will ensure **FERPA compliance** and adhere to ethical web scraping practices, ensuring no personal or sensitive information is collected or processed.
 
-## 3. Data Planning and Splits
-The data will be processed through several stages:
-
-- **Loading:** Data will be scraped or downloaded from the website.
-- **Preprocessing:** Data will be split into smaller, manageable segments for question-answering tasks. This includes breaking down larger documents into smaller sections and encoding them into vector embeddings.
-- **Data Splits:** Data will be divided into training, validation, and testing sets to effectively train the RAG model.
-
-## 4. GitHub Repository
+## 3. GitHub Repository
 The repository will contain a `README` file, which includes essential project information such as installation instructions, usage guidelines, and details of the folder structure.
 
 ### Folder Structure
@@ -68,17 +60,17 @@ The repository will follow this structure:
   - **README.md:** Project documentation.
   - **requirements.txt:** Lists all dependencies for the project.
 
-## 5. Project Scope
+## 4. Project Scope
 
-### 5.1 Problems
+### 4.1 Problems
 - **Lack of Awareness:** Researchers are often unaware of the services offered by the Research Computing Department.
 - **Access to Resources:** Navigating the information on the department's website is challenging for researchers, leading to difficulty in accessing resources.
 - **Incident Overload:** Due to the challenges of finding information, many issues that could be resolved through self-service result in a large number of incident reports, increasing the workload for research assistants and employees.
 
-### 5.2 Current Solutions
+### 4.2 Current Solutions
 - **Manual Search:** Currently, researchers manually browse the website to find relevant information, which is inefficient and time-consuming.
 - **Incident Tickets:** Every time an issue arises, a ticket is created, and the researcher must wait for the issue to be resolved by a research assistant, leading to delays in productivity.
 
-### 5.3 Proposed Solutions
+### 4.3 Proposed Solutions
 - **RAG-based Chatbot:** Develop a RAG chatbot that can efficiently answer common questions related to the department's resources and services.
 - **Improved Resource Discovery:** Leverage existing information from the department's website to enhance the chatbot’s accuracy in responding to user queries, making resource discovery more efficient.
