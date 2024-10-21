@@ -1,0 +1,110 @@
+General HPC Usage and Setup:
+What is HPC, and how does it differ from regular computing systems?
+How can you connect to the Northeastern University HPC cluster from a Mac, Windows, or Linux machine?
+What are the available resources for connecting to the HPC cluster on different platforms?
+How do you start using the cluster for job submissions?
+What is the importance of data storage management in HPC environments?
+What are the data storage options available for users on the HPC cluster?
+How can you securely transfer data to and from the HPC cluster?
+What is Globus, and how can it be used to transfer large datasets on the HPC cluster?
+What are the best practices for data management within the HPC environment?
+How can you access the multi-GPU partition on the HPC cluster?
+Running Jobs on the HPC Cluster:
+How does the queuing system work in HPC, and what is its significance?
+What are the job scheduling policies and priorities on the HPC cluster?
+What are the key differences between interactive and batch mode job submissions?
+How do you monitor jobs on the HPC using Slurm commands?
+What is the importance of checkpointing jobs, and how is it done?
+How do you submit a job using the job-assist tool on the HPC cluster?
+How can you run GPU-based jobs on the HPC?
+What is a Slurm job array, and how is it useful?
+How do you cancel or modify a job using the Slurm commands?
+How do you monitor job priority and determine the factors that affect it?
+Software and Module Management:
+What system-wide software is available on the HPC cluster?
+How do you install and use Conda package manager on the HPC?
+What is Spack, and how is it useful for software installation on HPC?
+How can you compile and run software from source on the HPC cluster?
+What are the available tools for managing software on the cluster?
+How can you load and use MPI for running parallel computing jobs on the HPC?
+What are some common issues when installing software on the HPC cluster?
+How do you ensure your environment is properly configured before running jobs?
+What is the role of OpenMPI in parallel computing on the cluster?
+How can you optimize software performance on the HPC cluster?
+Data Management and Best Practices:
+What are the quotas for home and work directory storage on the HPC cluster?
+How is the scratch directory managed, and why is it important to move files out of it?
+What are the consequences of a scratch directory purge, and how can you prepare for it?
+What is the role of checkpointing in ensuring job progress during purges or system outages?
+How can you move data from scratch to home or work directories securely?
+What steps should you follow to ensure efficient storage management for your jobs?
+How can you automate data transfer on the HPC using scripts?
+What are the retention policies for different storage locations on the HPC?
+What should you do if your files exceed the storage limit in your home directory?
+How do you apply for additional storage on the work directory?
+Working with GPUs:
+What are the steps involved in gaining access to the multi-GPU partition?
+How can you optimize jobs that run on multiple GPUs?
+What are the recommendations for testing jobs with different numbers of GPUs?
+How can you scale your job across multiple GPUs for deep learning tasks?
+How do you monitor GPU usage during job execution?
+What are the limitations and best practices for running jobs on V100 and A100 GPUs?
+What Slurm commands are used for job submission when utilizing GPUs?
+How do you submit jobs that require specific GPU resources?
+What are the recommendations for conserving GPU resources on the HPC cluster?
+What is the significance of scaling efficiency, and how do you calculate it?
+Cluster Management and Monitoring:
+How do you monitor the status of compute nodes on the HPC cluster?
+What are the available commands to check resource availability across different partitions?
+How can you check the status of your running or pending jobs?
+What factors contribute to the priority of jobs in the queue?
+How can you improve job priority by adjusting resource requests?
+What are the available policies for fair-share scheduling on the HPC cluster?
+How do you monitor the current system load and available resources?
+What is the importance of monitoring job states and efficiency metrics?
+How do you debug issues related to job submissions and system performance?
+What are the risks of network disconnections during interactive job sessions?
+Teaching and Classroom Integration:
+How can instructors integrate HPC resources into their classroom projects?
+What are the benefits of using HPC for educational purposes?
+What is the process for requesting HPC resources for class projects?
+How do students and instructors access classroom-specific resources on the cluster?
+What are the key considerations when designing course materials for HPC use?
+How can students use JupyterLab and RStudio on the cluster for class assignments?
+How does the NU HPC cluster enhance learning through hands-on computing projects?
+What are the available resources for instructors to train students on HPC usage?
+How do students access GPU resources for class assignments?
+What are the available cheatsheets for classroom use on the HPC cluster?
+Best Practices and Troubleshooting:
+What are the best practices for optimizing your project workflows on the HPC?
+How do you configure your shell environment for efficient HPC usage?
+What are the recommended tools for automating job submission and management?
+How can you ensure that your jobs use only the resources they need?
+What steps should you take to troubleshoot failed jobs on the cluster?
+How do you use module commands to load necessary software for your jobs?
+What are the available tools for debugging MPI programs on the HPC?
+How do you optimize parallel jobs for better performance on the cluster?
+What is the role of non-blocking operations in improving job efficiency?
+How can you reduce the communication overhead in distributed computing jobs?
+FAQs and Additional Resources:
+What are the common errors that users encounter when using the OOD interface?
+How can you resolve disk quota exceeded errors during job submissions?
+What steps should you take to free up space in your home directory?
+How do you resolve C++17 standard-related errors during package installations?
+What are the available FAQs for troubleshooting common cluster issues?
+How do you configure your .bashrc file for better environment management?
+What are the guidelines for installing user-specific software on the HPC cluster?
+How do you install and configure R packages that require specific GCC versions?
+What is the significance of loading the correct compiler for your software installations?
+How can you seek help from the Research Computing team when encountering issues?
+Specific Commands and Usage:
+How do you use the squeue command to monitor job status?
+What is the scancel command, and when should you use it?
+How do you specify memory and time limits in a Slurm job submission script?
+How do you submit a job array using the sbatch command?
+What are the available sinfo command options for monitoring partition usage?
+How do you define job dependencies in a Slurm job script?
+What are the advantages of using the --gres option in GPU-based job submissions?
+How do you configure your MPI jobs to use multiple network interfaces?
+What tools are available for benchmarking OpenMPI performance on the cluster?
+How do you automate repetitive job submissions using Slurm job arrays?
