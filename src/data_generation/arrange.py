@@ -3,7 +3,7 @@ from Scrape import scrape_and_save
 from Get_all_url import get_all_links
 
 # Base directory where all scraped data will be stored
-base_dir = 'ScrapedData'
+base_dir = '../data/raw/'
 
 # Define a function to arrange and scrape the data
 def arrange_scraped_data(fetched_links):
