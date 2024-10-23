@@ -50,6 +50,6 @@ def fetch_and_print_links(section_urls):
         section_name = f'section-{i}'
         print(f"{section_name} has {len(fetched_links[section_name])} links")
     
-
+    return fetched_links
 # Example usage
 

@@ -3,7 +3,7 @@ from Scrape import scrape_and_save
 from Get_all_url import get_all_links
 
 # Base directory where all scraped data will be stored
-base_dir = '../data/raw/'
+base_dir = '../../data/raw/'
 
 # Define a function to arrange and scrape the data
 def arrange_scraped_data(fetched_links):
@@ -24,8 +24,3 @@ def arrange_scraped_data(fetched_links):
         except Exception as e:
             print(f"An error occurred while saving to {file_path}: {e}")
 
-# Example usage of the function
-# fetched_links should be obtained by running your get_all_links logic first
-# fetched_links = {...}
-
-# arrange_scraped_data(fetched_links)

@@ -27,5 +27,4 @@ section_urls = {
 
 # Fetch and print links for all sections
 fetched_links=fetch_and_print_links(section_urls)
-
 arrange_scraped_data(fetched_links)
