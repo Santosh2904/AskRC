@@ -21,3 +21,12 @@ Before running the scripts, ensure you have the following installed on your mach
 You can check if Docker is installed by running the following command:
 ```bash
 docker --version
+```
+To launch
+```bash
+docker-compose up
+```
+To close
+```bash
+docker-compose down
+```
