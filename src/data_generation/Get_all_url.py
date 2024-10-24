@@ -46,7 +46,7 @@ def fetch_and_print_links(section_urls):
             fetched_links[section].extend(all_links)
 
     # Print the fetched links
-    for i in range(1, 12):  # Loop from 1 to 11 (inclusive)
+    for i in range(1, 13):  # Loop from 1 to 11 (inclusive)
         section_name = f'section-{i}'
         print(f"{section_name} has {len(fetched_links[section_name])} links")
     
