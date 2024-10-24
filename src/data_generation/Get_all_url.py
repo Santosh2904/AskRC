@@ -34,7 +34,7 @@ def get_all_links(url, visited=None, depth=0, max_depth=10):
 
 # Function to fetch links for all sections and print the number of links for each section
 def fetch_and_print_links(section_urls):
-    fetched_links = {}
+    fetched_links = { 'section-0': ["https://rc-docs.northeastern.edu/en/latest/"]}
 
         
     for section, urls in section_urls.items():
@@ -46,10 +46,10 @@ def fetch_and_print_links(section_urls):
             fetched_links[section].extend(all_links)
 
     # Print the fetched links
-    for i in range(1, 12):  # Loop from 1 to 11 (inclusive)
+    for i in range(0, 12):  # Loop from 1 to 11 (inclusive)
         section_name = f'section-{i}'
         print(f"{section_name} has {len(fetched_links[section_name])} links")
     
-
+    return fetched_links
 # Example usage
 

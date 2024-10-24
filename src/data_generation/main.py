@@ -3,9 +3,6 @@ from arrange import arrange_scraped_data
 #from Scrape import scrape_and_save
 documentation_url = "https://rc-docs.northeastern.edu/en/latest/index.html"
 
-
-
-
 #links = get_all_links(documentation_url)
 #print(f"Fetched {len(links)} links")
 #print(links)
@@ -27,5 +24,4 @@ section_urls = {
 
 # Fetch and print links for all sections
 fetched_links=fetch_and_print_links(section_urls)
-
 arrange_scraped_data(fetched_links)
