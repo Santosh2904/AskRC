@@ -9,7 +9,6 @@ documentation_url = "https://rc-docs.northeastern.edu/en/latest/index.html"
 #scrape_and_save(links, "./scraped_content.txt")
 
 section_urls = {
-    'section-0': ["https://rc-docs.northeastern.edu/en/latest/"],
     'section-1': ["https://rc-docs.northeastern.edu/en/latest/connectingtocluster/index.html#"],
     'section-2': ["https://rc-docs.northeastern.edu/en/latest/runningjobs/index.html"],
     'section-3': ["https://rc-docs.northeastern.edu/en/latest/gpus/index.html"],

@@ -7,7 +7,7 @@ base_dir = '../../data/raw/'
 
 # Define a function to arrange and scrape the data
 def arrange_scraped_data(fetched_links):
-    for i in range(1, 13):
+    for i in range(0, 12):
         section_name = f'section-{i}'
         links = fetched_links[section_name]  # Get the list of links for the current section
         
