@@ -1,9 +1,27 @@
+"""
+get_all_urls.py
+
+This module handles fetching all links from the URLs of the sections provided.
+It recursively visits links on each page, up to a specified depth, to gather all relevant URLs.
+"""
+
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-# Function to get all links from a URL up to a certain depth
 def get_all_links(url, visited=None, depth=0, max_depth=10):
+    """
+    Recursively fetch all links from a given URL up to a certain depth.
+
+    Args:
+        url (str): The base URL to scrape for links.
+        visited (set): A set of already visited URLs to avoid duplication.
+        depth (int): The current depth of recursion.
+        max_depth (int): The maximum depth of recursion.
+
+    Returns:
+        set: A set of URLs found on the page and its sub-pages up to the specified depth.
+    """
     if visited is None:
         visited = set()
 
@@ -11,19 +29,19 @@ def get_all_links(url, visited=None, depth=0, max_depth=10):
         return set()  # Stop recursion if max depth is reached
 
     try:
-        response = requests.get(url)
+        response = requests.get(url)  # Fetch the content of the URL
         soup = BeautifulSoup(response.content, "html.parser")
         
         links = set()
         for a_tag in soup.find_all("a", href=True):
-            absolute_url = urljoin(url, a_tag['href'])
+            absolute_url = urljoin(url, a_tag['href'])  # Convert relative URLs to absolute
             if absolute_url not in visited:
                 links.add(absolute_url)
                 visited.add(absolute_url)
         
         # Recursively visit each new link, increasing the depth
         for link in list(links):
-            if link.startswith(url):  # Scrape only links that start with the base URL
+            if link.startswith(url):  # Only follow links that start with the base URL
                 links.update(get_all_links(link, visited, depth + 1, max_depth))
         
         return links
@@ -32,24 +50,30 @@ def get_all_links(url, visited=None, depth=0, max_depth=10):
         print(f"Error fetching {url}: {e}")
         return set()
 
-# Function to fetch links for all sections and print the number of links for each section
 def fetch_and_print_links(section_urls):
-    fetched_links = { 'section-0': ["https://rc-docs.northeastern.edu/en/latest/"]}
+    """
+    Fetch and print links for each section.
 
-        
+    This function takes the section URLs, fetches the links for each, and prints 
+    how many links were found for each section.
+
+    Args:
+        section_urls (dict): A dictionary containing section names and their URLs.
+
+    Returns:
+        dict: A dictionary of sections and their corresponding fetched links.
+    """
+    fetched_links = {}
+
     for section, urls in section_urls.items():
-        fetched_links[section] = []  # Initialize an empty list for each section
+        fetched_links[section] = []
         for url in urls:
-            # Call the get_all_links function to fetch the links from each URL
+            # Fetch all links for the section
             all_links = get_all_links(url)
-            # Append the fetched links to the corresponding section in the new dictionary
             fetched_links[section].extend(all_links)
 
-    # Print the fetched links
-    for i in range(0, 12):  # Loop from 1 to 11 (inclusive)
-        section_name = f'section-{i}'
-        print(f"{section_name} has {len(fetched_links[section_name])} links")
+    # Print the number of links found for each section
+    for section, links in fetched_links.items():
+        print(f"{section} has {len(links)} links")
     
     return fetched_links
-# Example usage
-

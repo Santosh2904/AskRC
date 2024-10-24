@@ -1,13 +1,20 @@
+"""
+scrape.py
+
+This module is responsible for scraping content from URLs and saving the scraped content 
+into specified files.
+"""
+
 import requests
 from bs4 import BeautifulSoup
 
 def scrape_and_save(urls, output_file="scraped_content.txt"):
     """
-    Scrape content from a list of URLs and save the content into a .txt file.
+    Scrape content from a list of URLs and save the content into a text file.
     
     Args:
-        urls (list): List of URLs to scrape.
-        output_file (str): File path to save the scraped content.
+        urls (list): List of URLs to scrape content from.
+        output_file (str): File path where the scraped content will be saved.
     """
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -15,11 +22,10 @@ def scrape_and_save(urls, output_file="scraped_content.txt"):
                 print(f"Scraping content from: {url}")
                 try:
                     response = requests.get(url)
-                    print(f"Response code: {response.status_code}")  # Add this to verify response
-                    response.raise_for_status()  # Check if the request was successful
+                    response.raise_for_status()  # Check for successful response
                     
                     soup = BeautifulSoup(response.content, 'html.parser')
-                    page_text = soup.get_text(separator="\n", strip=True)
+                    page_text = soup.get_text(separator="\n", strip=True)  # Extract text from the page
                     
                     if page_text:
                         # Write the URL as a header for clarity
