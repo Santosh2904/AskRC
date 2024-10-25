@@ -1,0 +1,40 @@
+[2024-10-25T19:05:04.117+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: temp_data_pipeline_dag.track_data_task manual__2024-10-25T19:04:43.797193+00:00 [queued]>
+[2024-10-25T19:05:04.130+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: temp_data_pipeline_dag.track_data_task manual__2024-10-25T19:04:43.797193+00:00 [queued]>
+[2024-10-25T19:05:04.130+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2024-10-25T19:05:04.130+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 2
+[2024-10-25T19:05:04.130+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2024-10-25T19:05:04.140+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): track_data_task> on 2024-10-25 19:04:43.797193+00:00
+[2024-10-25T19:05:04.159+0000] {standard_task_runner.py:55} INFO - Started process 151 to run task
+[2024-10-25T19:05:04.169+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'temp_data_pipeline_dag', 'track_data_task', 'manual__2024-10-25T19:04:43.797193+00:00', '--job-id', '56', '--raw', '--subdir', 'DAGS_FOLDER/temp-***.py', '--cfg-path', '/tmp/tmpdwuh8q5s']
+[2024-10-25T19:05:04.173+0000] {standard_task_runner.py:83} INFO - Job 56: Subtask track_data_task
+[2024-10-25T19:05:04.224+0000] {task_command.py:388} INFO - Running <TaskInstance: temp_data_pipeline_dag.track_data_task manual__2024-10-25T19:04:43.797193+00:00 [running]> on host 2e2c4425eb34
+[2024-10-25T19:05:04.275+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=santosh
+AIRFLOW_CTX_DAG_ID=temp_data_pipeline_dag
+AIRFLOW_CTX_TASK_ID=track_data_task
+AIRFLOW_CTX_EXECUTION_DATE=2024-10-25T19:04:43.797193+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2024-10-25T19:04:43.797193+00:00
+[2024-10-25T19:05:04.309+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 175, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/operators/python.py", line 192, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/temp-airflow.py", line 44, in track_data_task_func
+    track_all_data_with_dvc(TRACK_DATA_PATH)
+  File "/opt/airflow/src/data_pipeline/dvc_tracker.py", line 43, in track_all_data_with_dvc
+    subprocess.run(['dvc', 'add', data_dir], check=True)
+  File "/usr/local/lib/python3.7/subprocess.py", line 488, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/local/lib/python3.7/subprocess.py", line 800, in __init__
+    restore_signals, start_new_session)
+  File "/usr/local/lib/python3.7/subprocess.py", line 1551, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+PermissionError: [Errno 13] Permission denied: 'dvc'
+[2024-10-25T19:05:04.320+0000] {taskinstance.py:1323} INFO - Marking task as UP_FOR_RETRY. dag_id=temp_data_pipeline_dag, task_id=track_data_task, execution_date=20241025T190443, start_date=20241025T190504, end_date=20241025T190504
+[2024-10-25T19:05:04.329+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 56 for task track_data_task ([Errno 13] Permission denied: 'dvc'; 151)
+[2024-10-25T19:05:04.352+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2024-10-25T19:05:04.362+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
