@@ -1836,3 +1836,87 @@
 [2024-10-25T20:53:31.320+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:53:31.320+0000] {dag.py:2690} INFO - Sync 1 DAGs
 [2024-10-25T20:53:31.346+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:53:31.346+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
 [2024-10-25T20:53:31.361+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.256 seconds
+[2024-10-25T20:54:01.929+0000] {processor.py:153} INFO - Started process (PID=8041) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:54:01.932+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:54:01.933+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:01.933+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:54:02.062+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:54:02.089+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:02.088+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:54:02.120+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:02.120+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:54:02.136+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.215 seconds
+[2024-10-25T20:54:32.733+0000] {processor.py:153} INFO - Started process (PID=8075) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:54:32.736+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:54:32.737+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:32.737+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:54:33.222+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:54:33.287+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:33.286+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:54:33.317+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:33.316+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:54:33.345+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.616 seconds
+[2024-10-25T20:55:03.847+0000] {processor.py:153} INFO - Started process (PID=8109) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:55:03.850+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:55:03.851+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:03.851+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:55:03.985+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:55:04.032+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:04.032+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:55:04.058+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:04.058+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:55:04.072+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.233 seconds
+[2024-10-25T20:55:34.449+0000] {processor.py:153} INFO - Started process (PID=8159) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:55:34.451+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:55:34.452+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:34.452+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:55:34.633+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:55:34.683+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:34.683+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:55:34.717+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:34.717+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:55:34.734+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.291 seconds
+[2024-10-25T20:56:05.068+0000] {processor.py:153} INFO - Started process (PID=8193) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:56:05.075+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:56:05.077+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:05.077+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:56:05.255+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:56:05.313+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:05.312+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:56:05.355+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:05.355+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:56:05.410+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.358 seconds
+[2024-10-25T20:56:35.756+0000] {processor.py:153} INFO - Started process (PID=8227) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:56:35.760+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:56:35.761+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:35.761+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:56:35.906+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:56:35.946+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:35.946+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:56:35.983+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:35.983+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:56:36.001+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.253 seconds
+[2024-10-25T20:57:06.163+0000] {processor.py:153} INFO - Started process (PID=8277) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:57:06.171+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:57:06.173+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:06.172+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:57:06.300+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:57:06.337+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:06.337+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:57:06.361+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:06.361+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:57:06.376+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.229 seconds
+[2024-10-25T20:57:36.821+0000] {processor.py:153} INFO - Started process (PID=8311) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:57:36.826+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:57:36.827+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:36.827+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:57:36.965+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:57:37.006+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:37.006+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:57:37.034+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:37.034+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:57:37.049+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.262 seconds
+[2024-10-25T20:58:07.636+0000] {processor.py:153} INFO - Started process (PID=8361) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:58:07.639+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:58:07.640+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:07.640+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:58:07.817+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:58:07.940+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:07.939+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:58:07.980+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:07.980+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:58:08.007+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.380 seconds
+[2024-10-25T20:58:38.377+0000] {processor.py:153} INFO - Started process (PID=8395) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:58:38.380+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:58:38.381+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:38.381+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:58:38.563+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:58:38.616+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:38.615+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:58:38.671+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:38.670+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:58:38.715+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.369 seconds
+[2024-10-25T20:59:08.926+0000] {processor.py:153} INFO - Started process (PID=8429) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:59:08.930+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:59:08.931+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:08.931+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:59:09.089+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:59:09.142+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:09.142+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:59:09.173+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:09.173+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:59:09.191+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.288 seconds
+[2024-10-25T20:59:39.365+0000] {processor.py:153} INFO - Started process (PID=8478) to work on /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:59:39.368+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/test-airflow.py for tasks to queue
+[2024-10-25T20:59:39.370+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:39.370+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:59:39.569+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Data_Pipeline_Scrape']) retrieved from /opt/airflow/dags/test-airflow.py
+[2024-10-25T20:59:39.702+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:39.701+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:59:39.757+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:39.756+0000] {dag.py:3441} INFO - Setting next_dagrun for Data_Pipeline_Scrape to None, run_after=None
+[2024-10-25T20:59:39.788+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/test-airflow.py took 0.435 seconds

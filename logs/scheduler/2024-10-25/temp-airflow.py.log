@@ -6516,3 +6516,113 @@ ModuleNotFoundError: No module named 'get_all_url'
 [2024-10-25T20:53:16.793+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:53:16.792+0000] {dag.py:2690} INFO - Sync 1 DAGs
 [2024-10-25T20:53:16.832+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:53:16.832+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
 [2024-10-25T20:53:16.850+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 0.664 seconds
+[2024-10-25T20:53:47.695+0000] {processor.py:153} INFO - Started process (PID=8024) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:53:47.703+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:53:47.705+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:53:47.704+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:53:48.264+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:53:48.267+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:53:48.792+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:53:48.837+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:53:48.836+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:53:48.861+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:53:48.861+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:53:48.874+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 1.193 seconds
+[2024-10-25T20:54:19.279+0000] {processor.py:153} INFO - Started process (PID=8058) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:54:19.286+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:54:19.287+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:19.287+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:54:19.833+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:54:19.835+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:54:20.399+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:54:20.444+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:20.443+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:54:20.468+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:20.468+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:54:20.482+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 1.231 seconds
+[2024-10-25T20:54:50.606+0000] {processor.py:153} INFO - Started process (PID=8092) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:54:50.614+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:54:50.615+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:50.615+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:54:51.102+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:54:51.104+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:54:51.633+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:54:51.673+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:51.673+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:54:51.699+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:54:51.699+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:54:51.716+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 1.127 seconds
+[2024-10-25T20:55:22.247+0000] {processor.py:153} INFO - Started process (PID=8142) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:55:22.251+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:55:22.252+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:22.252+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:55:22.670+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:55:22.671+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:55:23.163+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:55:23.196+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:23.196+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:55:23.218+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:23.218+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:55:23.234+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 0.996 seconds
+[2024-10-25T20:55:53.695+0000] {processor.py:153} INFO - Started process (PID=8176) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:55:53.699+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:55:53.700+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:53.700+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:55:54.067+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:55:54.068+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:55:54.475+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:55:54.540+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:54.539+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:55:54.588+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:55:54.587+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:55:54.606+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 0.917 seconds
+[2024-10-25T20:56:25.373+0000] {processor.py:153} INFO - Started process (PID=8226) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:56:25.379+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:56:25.388+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:25.387+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:56:25.911+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:56:25.917+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:56:26.037+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:56:26.103+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:26.102+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:56:26.165+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:26.165+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:56:26.214+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 0.849 seconds
+[2024-10-25T20:56:57.127+0000] {processor.py:153} INFO - Started process (PID=8260) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:56:57.131+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:56:57.132+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:57.132+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:56:57.488+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:56:57.490+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:56:57.907+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:56:57.942+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:57.942+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:56:57.964+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:56:57.964+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:56:57.978+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 0.863 seconds
+[2024-10-25T20:57:28.649+0000] {processor.py:153} INFO - Started process (PID=8310) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:57:28.654+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:57:28.656+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:28.655+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:57:29.346+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:57:29.351+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:57:29.785+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:57:29.811+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:29.811+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:57:29.848+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:57:29.848+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:57:29.868+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 1.228 seconds
+[2024-10-25T20:58:32.072+0000] {processor.py:153} INFO - Started process (PID=8385) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:58:32.078+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:58:32.081+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:32.080+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:58:32.573+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:58:32.575+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:58:33.562+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:58:33.604+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:33.603+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:58:33.629+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:58:33.628+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:58:33.657+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 1.604 seconds
+[2024-10-25T20:59:03.803+0000] {processor.py:153} INFO - Started process (PID=8428) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:59:03.811+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:59:03.818+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:03.818+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:59:04.267+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:59:04.269+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:59:04.730+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:59:04.840+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:04.839+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:59:04.898+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:04.898+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:59:04.941+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 1.147 seconds
+[2024-10-25T20:59:35.558+0000] {processor.py:153} INFO - Started process (PID=8462) to work on /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:59:35.572+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/temp-airflow.py for tasks to queue
+[2024-10-25T20:59:35.577+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:35.576+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:59:36.056+0000] {logging_mixin.py:137} WARNING - [nltk_data] Downloading package stopwords to
+[nltk_data]     /home/airflow/nltk_data...
+[2024-10-25T20:59:36.058+0000] {logging_mixin.py:137} WARNING - [nltk_data]   Package stopwords is already up-to-date!
+[2024-10-25T20:59:36.151+0000] {processor.py:753} INFO - DAG(s) dict_keys(['temp_data_pipeline_dag']) retrieved from /opt/airflow/dags/temp-airflow.py
+[2024-10-25T20:59:36.196+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:36.196+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2024-10-25T20:59:36.226+0000] {logging_mixin.py:137} INFO - [2024-10-25T20:59:36.226+0000] {dag.py:3441} INFO - Setting next_dagrun for temp_data_pipeline_dag to 2024-10-25T00:00:00+00:00, run_after=2024-10-26T00:00:00+00:00
+[2024-10-25T20:59:36.243+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/temp-airflow.py took 0.697 seconds
