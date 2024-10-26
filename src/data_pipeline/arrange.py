@@ -6,10 +6,10 @@ It saves the scraped content from each section into its own directory and text f
 """
 
 import os
-from scrape import scrape_and_save
+from .scrape import scrape_and_save
 
 # Define the base directory where all scraped data will be stored
-base_dir = '../../data/raw/'
+base_dir = '/opt/airflow/data/raw/'
 
 def arrange_scraped_data(fetched_links):
     """
@@ -21,6 +21,7 @@ def arrange_scraped_data(fetched_links):
     Args:
         fetched_links (dict): A dictionary of sections and their corresponding fetched links.
     """
+    print("Arranging scraped data...")  # Indicate the start of the arrangement process
     for section_name, links in fetched_links.items():
         # Define the directory path for each section
         dir_path = f"{base_dir}/{section_name}"

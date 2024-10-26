@@ -5,7 +5,7 @@ This script orchestrates the entire scraping process. It determines which sectio
 based on the current week and runs the scraping for all sections up to and including the current week.
 """
 
-from scraper import scrape_sections_up_to_current_week
+from .scraper import scrape_sections_up_to_current_week
 
 def main():
     """

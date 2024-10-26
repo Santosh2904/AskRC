@@ -16,6 +16,7 @@ def scrape_and_save(urls, output_file="scraped_content.txt"):
         urls (list): List of URLs to scrape content from.
         output_file (str): File path where the scraped content will be saved.
     """
+    print("Running scrape & save")
     try:
         with open(output_file, 'w', encoding='utf-8') as f:
             for url in urls:

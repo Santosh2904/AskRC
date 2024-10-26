@@ -1,0 +1,8 @@
+logs/
+src/data_pipeline/__pycache__
+dags/__pycache__/
+askrc/
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
