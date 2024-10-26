@@ -5,9 +5,10 @@ This module manages the scraping logic for each section of the website. It handl
 for scraping sections based on the current week and ensuring that a new section is added each week.
 """
 
-from get_all_url import fetch_and_print_links
-from arrange import arrange_scraped_data
-from utils import get_current_week
+# Import necessary functions from other modules
+from .get_all_url import fetch_and_print_links
+from .arrange import arrange_scraped_data
+from .utils import get_current_week
 
 # Define the URLs for each section to scrape
 section_urls = {
@@ -35,6 +36,7 @@ def scrape_sections_up_to_current_week():
     Returns:
         dict: A dictionary of the sections that were scraped in the current run.
     """
+    print("Starting the scraping process...")  # Indicate the start of the scraping process
     current_week = get_current_week()  # Calculate the current week based on the start date
     
     # Ensure the current week does not exceed the number of available sections (11)
@@ -44,10 +46,11 @@ def scrape_sections_up_to_current_week():
     
     # Determine which sections to scrape (based on the current week)
     sections_to_scrape = {f'section-{i}': section_urls[f'section-{i}'] for i in range(1, current_week + 1)}
+    print(f"Sections to scrape: {sections_to_scrape}")  # Debug statement to show which sections will be scraped
     
     # Fetch links and arrange the scraped data for the sections
     fetched_links = fetch_and_print_links(sections_to_scrape)
+    print(f"Fetched links: {fetched_links}")  # Debug statement to show fetched links
     arrange_scraped_data(fetched_links)
     
-    return sections_to_scrape  # Return the sections that were scraped
-
+    return sections_to_scrape   # Return the sections that were scraped

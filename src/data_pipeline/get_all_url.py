@@ -1,5 +1,5 @@
 """
-get_all_urls.py
+get_all_url.py
 
 This module handles fetching all links from the URLs of the sections provided.
 It recursively visits links on each page, up to a specified depth, to gather all relevant URLs.
@@ -22,6 +22,7 @@ def get_all_links(url, visited=None, depth=0, max_depth=10):
     Returns:
         set: A set of URLs found on the page and its sub-pages up to the specified depth.
     """
+    print("running get_all_links") 
     if visited is None:
         visited = set()
 
