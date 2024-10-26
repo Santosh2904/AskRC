@@ -1,6 +1,0 @@
-apache-airflow
-nltk
-pandas
-scikit-learn
-requests
-beautifulsoup4
