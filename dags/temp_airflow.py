@@ -8,12 +8,12 @@ from datetime import datetime, timedelta
 sys.path.append('/opt/airflow/src')
 
 from data_pipeline.preprocess import preprocess_data
-from data_pipeline.dvc_tracker import track_all_data_with_dvc
+#from data_pipeline.dvc_tracker import track_all_data_with_dvc
 from data_pipeline.scraper import scrape_sections_up_to_current_week
 
 RAW_DATA_PATH = 'data/raw'
 PROCESSED_DATA_PATH = 'data/processed'
-TRACK_DATA_PATH = 'data'
+#TRACK_DATA_PATH = 'data'
 
 default_args = {
     'owner': 'santosh',
@@ -39,13 +39,6 @@ with DAG('temp_data_pipeline_dag', default_args=default_args, schedule_interval=
         task_id='preprocess_task',
         python_callable=preprocess_data_task,
     )
+
     
-    def track_data_task_func():
-        track_all_data_with_dvc(TRACK_DATA_PATH)
-    
-    track_data_task = PythonOperator(
-        task_id='track_data_task',
-        python_callable=track_data_task_func,
-    )
-    
-    scrape_task >> preprocess_task >> track_data_task
+    scrape_task >> preprocess_task
