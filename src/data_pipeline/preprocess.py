@@ -9,6 +9,9 @@ import os
 import re
 import nltk
 from nltk.corpus import stopwords
+from data_pipeline.azure_uploader import upload_to_blob
+from datetime import datetime
+
 
 # Download stopwords if not already done
 nltk.download('stopwords')
@@ -63,8 +66,22 @@ def preprocess_text_file(input_file_path, output_file_path):
             file.write(cleaned_text)
         
         print(f"Processed text saved to {output_file_path}")
+        print("Uploading to Azure blob storage")
+        upload_to_blob(output_file_path, file_name=getFileName(output_file_path))
     except Exception as e:
         print(f"Error during preprocessing file {input_file_path}: {str(e)}")
+
+
+def getFileName(file_path):
+    file_name = getFileNameWithoutExtension(file_path)
+    # Get the current time in a format safe for filenames
+    time_str = datetime.now().strftime("%Y%m%d_%H%M%S")
+    return file_name + "_" + time_str + ".txt"
+
+
+def getFileNameWithoutExtension(file_path):
+    filename = os.path.basename(file_path)
+    return os.path.splitext(filename)[0]
 
 def preprocess_data(input_folder, output_folder):
     """
