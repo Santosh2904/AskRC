@@ -4,3 +4,6 @@ pandas
 scikit-learn
 requests
 beautifulsoup4
+azure-storage-blob
+azure-identity
+python-dotenv
