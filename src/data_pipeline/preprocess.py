@@ -66,8 +66,9 @@ def preprocess_text_file(input_file_path, output_file_path):
             file.write(cleaned_text)
         
         print(f"Processed text saved to {output_file_path}")
-        print("Uploading to Azure blob storage")
-        upload_to_blob(output_file_path, file_name=getFileName(output_file_path))
+        #print("Uploading to Azure blob storage")
+        #upload_to_blob(output_file_path, file_name=getFileName(output_file_path))
+        #print("Uploaded to azure")
     except Exception as e:
         print(f"Error during preprocessing file {input_file_path}: {str(e)}")
 

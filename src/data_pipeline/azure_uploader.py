@@ -42,7 +42,7 @@ def upload_to_blob(file_path, file_name):
     # Open the file and read its content
     try:
         with open(file_path, 'r') as file:
-            container_client.upload_blob(name = file_name, data=file.read())
+            container_client.upload_blob(name = file_name, data=file.read(), overwrite=True)
             print(file_path + " has been uploaded to blob storage")
     except FileNotFoundError:
         print("The file was not found at the specified path.")

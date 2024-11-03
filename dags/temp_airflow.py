@@ -10,9 +10,12 @@ sys.path.append('/opt/airflow/src')
 from data_pipeline.preprocess import preprocess_data
 #from data_pipeline.dvc_tracker import track_all_data_with_dvc
 from data_pipeline.scraper import scrape_sections_up_to_current_week
+from data_pipeline.preprocess import getFileName
+from data_pipeline.preprocess import getFileNameWithoutExtension 
+from data_pipeline.azure_uploader import upload_to_blob
 
 RAW_DATA_PATH = 'data/raw'
-PROCESSED_DATA_PATH = 'data/processed'
+PROCESSED_DATA_PATH = 'data/processed/'
 #TRACK_DATA_PATH = 'data'
 
 default_args = {
@@ -40,5 +43,17 @@ with DAG('temp_data_pipeline_dag', default_args=default_args, schedule_interval=
         python_callable=preprocess_data_task,
     )
 
+    def upload_task_func():
+        # Iterate through all processed files in the directory
+        for root, _, files in os.walk(PROCESSED_DATA_PATH):
+            for file in files:
+                if file.endswith(".txt"):  # Assuming you want to upload .txt files
+                    file_path = os.path.join(root, file)
+                    upload_to_blob(file_path, file)  # Upload each processed file
+
+    blob_storage_task = PythonOperator(
+        task_id='blob_storage_task',
+        python_callable=upload_task_func,
+    )
     
-    scrape_task >> preprocess_task
+    scrape_task >> preprocess_task >> blob_storage_task
