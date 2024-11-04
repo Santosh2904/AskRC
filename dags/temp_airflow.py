@@ -23,9 +23,18 @@ default_args = {
     'start_date': datetime(2024, 10, 25),
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
+    'email_on_failure': True,
+    'email': ['santhoshsanz29@gmail.com', 'majji.s@northeastern.edu', 'patlannagari.a@northeastern.edu', 'kancharla.ha@northeastern.edu', 'dharmappa.r@northeastern.edu', 'reddy.ru@northeastern.edu', 'nunna.va@northeastern.edu'],
+    'email_on_retry': False,
 }
 
-with DAG('temp_data_pipeline_dag', default_args=default_args, schedule_interval='@daily', catchup=False) as dag:
+with DAG(
+    'Data_pipeline_dag', 
+    default_args=default_args, 
+    description='A data pipeline DAG that scrapes sections, preprocesses the data, and uploads processed files to Azure Blob storage.',
+    schedule_interval='@daily', 
+    catchup=False
+    ) as dag:
     
     def scrape_task_func():
         scrape_sections_up_to_current_week()
