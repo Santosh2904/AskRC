@@ -13,6 +13,7 @@ from data_pipeline.scraper import scrape_sections_up_to_current_week
 from data_pipeline.preprocess import getFileName
 from data_pipeline.preprocess import getFileNameWithoutExtension 
 from data_pipeline.azure_uploader import upload_to_blob
+from data_pipeline.index_data import index_data_in_search
 
 RAW_DATA_PATH = 'data/raw'
 PROCESSED_DATA_PATH = 'data/processed/'
@@ -56,7 +57,7 @@ with DAG(
         # Iterate through all processed files in the directory
         for root, _, files in os.walk(PROCESSED_DATA_PATH):
             for file in files:
-                if file.endswith(".txt"):  # Assuming you want to upload .txt files
+                if file.endswith(".json"):  # Assuming you want to upload .txt files
                     file_path = os.path.join(root, file)
                     upload_to_blob(file_path, file)  # Upload each processed file
 
@@ -64,5 +65,10 @@ with DAG(
         task_id='blob_storage_task',
         python_callable=upload_task_func,
     )
+
+    index_task = PythonOperator(
+        task_id='index_task',
+        python_callable=index_data_in_search,
+    )
     
-    scrape_task >> preprocess_task >> blob_storage_task
+    scrape_task >> preprocess_task >> blob_storage_task >> index_task
