@@ -7,3 +7,4 @@ askrc/
 *.pyd
 __pycache__/
 .env
+.env
