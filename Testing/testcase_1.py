@@ -4,7 +4,7 @@ from unittest.mock import patch
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from src.data_pipeline.get_all_url import get_all_links 
+from src.data_pipeline.get_all_url import get_all_links
 from src.data_pipeline.scrape import scrape_and_save
 
 @pytest.fixture
@@ -35,10 +35,11 @@ def test_data_retrieval(random_url):
     assert data is not None, "No data retrieved from URL"
     assert len(data) > 0, "Empty data retrieved from URL"
 
-#test1
-
-def test_data_format(random_url):
-    data = scrape_and_save(urls)
+def test_data_format(urls):
+    """Test to verify data format from scraped pages."""
+    # Flatten the list of URLs from all sections
+    all_urls = [url for section_urls in urls.values() for url in section_urls]
+    data = scrape_and_save(all_urls)
     
     # Ensure data is a dictionary
     assert isinstance(data, dict), "Data format is not a dictionary"
@@ -48,7 +49,7 @@ def test_data_format(random_url):
         assert isinstance(content, str), f"Content for URL {url} is not a string"
         assert len(content) > 0, f"No content retrieved for URL {url}"
 
-@patch("src.data_generation.Get_all_url.requests.get")
+@patch("src.data_pipeline.get_all_url.requests.get")
 def test_error_handling(mock_get):
     """Test to check error handling for network failures."""
     mock_get.side_effect = Exception("Network error")
