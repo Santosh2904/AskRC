@@ -1,5 +1,8 @@
 import pytest
-from src.data_pipeline.preprocess import clean_text, split_content  # Adjusted to correct function names and imports
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from src.data_pipeline.preprocess import clean_text, split_content
 
 def test_clean_text():
     raw_data = "<p>Hello, World! 123</p>"
