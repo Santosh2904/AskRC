@@ -6,6 +6,7 @@ import nltk
 from nltk.corpus import stopwords
 from data_pipeline.azure_uploader import upload_to_blob
 from datetime import datetime
+from .azure_uploader import upload_to_blob  # Use relative import
 
 # Download stopwords if not already done
 nltk.download('stopwords')
