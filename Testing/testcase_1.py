@@ -35,11 +35,18 @@ def test_data_retrieval(random_url):
     assert data is not None, "No data retrieved from URL"
     assert len(data) > 0, "Empty data retrieved from URL"
 
+#test1
+
 def test_data_format(random_url):
-    """Test to verify data format from a scraped page."""
-    # Ensure data retrieval and format check
-    data = scrape_and_save(random_url)  # Adjust to your expected return type
+    data = scrape_and_save(urls)
+    
+    # Ensure data is a dictionary
     assert isinstance(data, dict), "Data format is not a dictionary"
+    
+    # Check that each URL in data has corresponding text content or an error message
+    for url, content in data.items():
+        assert isinstance(content, str), f"Content for URL {url} is not a string"
+        assert len(content) > 0, f"No content retrieved for URL {url}"
 
 @patch("src.data_generation.Get_all_url.requests.get")
 def test_error_handling(mock_get):
