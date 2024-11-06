@@ -28,7 +28,7 @@ jobs:
 
     - name: Run tests
       env:
-        PYTHONPATH: "${{ github.workspace }}"  # Add the root of the repository to PYTHONPATH
+        PYTHONPATH: "${{ github.workspace }}/src"  # Add the src directory to PYTHONPATH
       run: |
         pytest Testing/testcase_1.py
         pytest Testing/testcase_2.py
