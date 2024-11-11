@@ -7,6 +7,4 @@ askrc/
 *.pyd
 __pycache__/
 .env
-.env
-.env.example
-.env
+src/data_pipeline/.env
