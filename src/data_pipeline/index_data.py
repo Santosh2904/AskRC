@@ -3,6 +3,13 @@ import json
 from azure.storage.blob import BlobServiceClient
 from azure.search.documents import SearchClient
 from azure.core.credentials import AzureKeyCredential
+from azure.search.documents.indexes import SearchIndexClient, SearchIndexerClient
+from azure.search.documents.indexes.models import (
+    SearchIndex, SearchFieldDataType, SimpleField,
+    SearchIndexer, SearchIndexerDataSourceConnection
+)
+from azure.core.exceptions import ResourceExistsError, HttpResponseError, ResourceNotFoundError
+
 
 # Azure configuration
 AZURE_BLOB_URL = os.getenv("AZURE_BLOB_STORAGE_URL")
@@ -10,90 +17,116 @@ AZURE_BLOB_KEY = os.getenv("AZURE_BLOB_KEY")
 AZURE_SEARCH_ENDPOINT = os.getenv("AZURE_SEARCH_ENDPOINT")
 AZURE_SEARCH_KEY = os.getenv("AZURE_SEARCH_KEY")
 AZURE_CONTAINER_NAME = "preprocessed-data"
-AZURE_INDEX_NAME = "askrcindex"
+AZURE_INDEX_NAME = "mlops"
 
-def index_data_in_search(container_name=AZURE_CONTAINER_NAME, index_name=AZURE_INDEX_NAME):
-    """
-    Index data from Azure Blob Storage into Azure Cognitive Search.
-    
-    Args:
-        container_name (str): Name of the Azure Blob container
-        index_name (str): Name of the Azure Search index
+# Load environment variables from .env file
+load_dotenv()
+
+# Retrieve credentials and configuration from environment variables
+client_id = os.getenv('AZURE_CLIENT_ID')
+client_secret_value = os.getenv('AZURE_CLIENT_SECRET_VALUE')
+tenant_id = os.getenv('AZURE_TENANT_ID')
+search_service_endpoint = os.getenv('AZURE_SEARCH_ENDPOINT')
+search_api_key = os.getenv('AZURE_SEARCH_API_KEY')
+blob_connection_string = os.getenv('AZURE_BLOB_CONNECTION_STRING')
+blob_container_name = os.getenv('AZURE_BLOB_CONTAINER_NAME')
+index_name = os.getenv('AZURE_INDEX_NAME')
+
+# Initialize Azure AD credentials
+credentials = ClientSecretCredential(client_id=client_id, client_secret=client_secret_value, tenant_id=tenant_id)
+
+# Initialize Azure Search clients
+index_client = SearchIndexClient(endpoint=search_service_endpoint, credential=AzureKeyCredential(search_api_key))
+indexer_client = SearchIndexerClient(endpoint=search_service_endpoint, credential=AzureKeyCredential(search_api_key))
+
+# Initialize Blob Service Client
+blob_service_client = BlobServiceClient.from_connection_string(blob_connection_string)
+
+from azure.core.exceptions import ResourceExistsError, ResourceNotFoundError, HttpResponseError
+
+def create_data_source():
+    data_source_name = "blob-datasource"
+    try:
+        # Try to get the existing data source
+        data_source = indexer_client.get_data_source_connection(data_source_name)
+        print(f"Data source '{data_source_name}' already exists.")
         
-    Raises:
-        ValueError: If required environment variables are not set
-        Exception: For various Azure operations failures
-    """
-    # Validate environment variables
-    if not all([AZURE_BLOB_URL, AZURE_BLOB_KEY, AZURE_SEARCH_ENDPOINT, AZURE_SEARCH_KEY]):
-        raise ValueError("Required Azure environment variables are not set")
+    except ResourceNotFoundError:
+        # Data source does not exist, so we create it
+        try:
+            data_source = SearchIndexerDataSourceConnection(
+                name=data_source_name,
+                type="azureblob",
+                connection_string=blob_connection_string,
+                container={"name": blob_container_name}
+            )
+            indexer_client.create_data_source_connection(data_source)
+            print(f"Data source '{data_source_name}' created successfully.")
+        
+        except HttpResponseError as e:
+            print(f"An error occurred while creating the data source: {e.message}")
+    
+    except HttpResponseError as e:
+        print(f"An error occurred while checking data source: {e.message}")
+
+# Step 2: Create Search Index
+def create_search_index():
+    fields = [
+        SimpleField(name="id", type=SearchFieldDataType.String, key=True),
+        SimpleField(name="content", type=SearchFieldDataType.String, searchable=True)
+    ]
+    index = SearchIndex(name=index_name, fields=fields)
 
     try:
-        # Initialize Blob and Search Clients
-        blob_service_client = BlobServiceClient(
-            account_url=AZURE_BLOB_URL,
-            credential=AZURE_BLOB_KEY
-        )
-        container_client = blob_service_client.get_container_client(container_name)
-        
-        search_client = SearchClient(
-            endpoint=AZURE_SEARCH_ENDPOINT,
-            index_name=index_name,
-            credential=AzureKeyCredential(AZURE_SEARCH_KEY),
-            api_version="2021-04-30-Preview"
-        )
+        index_client.create_or_update_index(index)
+        print(f"Index '{index_name}' created or updated successfully.")
+    except HttpResponseError as e:
+        print(f"An error occurred while creating or updating the index: {e.message}")
 
-        # Loop through blobs in the specified container
-        for blob in container_client.list_blobs():
-            try:
-                blob_client = container_client.get_blob_client(blob)
+# Step 3: Create Indexer
+def create_indexer(indexer_name):
+    indexer = SearchIndexer(
+        name=indexer_name,
+        data_source_name="blob-datasource",
+        target_index_name=index_name,
+        field_mappings=[
+            {"sourceFieldName": "metadata_storage_path", "targetFieldName": "id"},
+            {"sourceFieldName": "content", "targetFieldName": "content"}
+        ]
+    )
+    try:
+        indexer_client.create_indexer(indexer)
+        print(f"Indexer '{indexer_name}' created successfully.")
+    except ResourceExistsError:
+        print(f"Indexer '{indexer_name}' already exists.")
+    except HttpResponseError as e:
+        print(f"An error occurred while creating the indexer: {e.message}")
 
-                # Download blob content and check if it's empty
-                blob_content = blob_client.download_blob().readall()
-                json_data = blob_content.decode("utf-8").strip()
-                
-                if not json_data:
-                    print(f"Warning: Blob {blob.name} is empty and will be skipped.")
-                    continue  # Skip this blob if it's empty
+# Step 4: Update Indexer
+def update_indexer(indexer_name):
+    indexer = SearchIndexer(
+        name=indexer_name,
+        data_source_name="blob-datasource",
+        target_index_name=index_name,
+        field_mappings=[
+            {"sourceFieldName": "metadata_storage_path", "targetFieldName": "id"},
+            {"sourceFieldName": "content", "targetFieldName": "content"}
+        ]
+    )
+    try:
+        indexer_client.create_or_update_indexer(indexer)
+        print(f"Indexer '{indexer_name}' updated successfully.")
+    except ResourceNotFoundError:
+        print(f"Indexer '{indexer_name}' not found.")
+    except HttpResponseError as e:
+        print(f"An error occurred while updating the indexer: {e.message}")
 
-                # Load JSON document from blob content
-                document = json.loads(json_data)
-                
-                # Validate document structure
-                if not isinstance(document, dict) or 'id' not in document:
-                    print(f"Warning: Blob {blob.name} has invalid document structure. Skipping.")
-                    continue
-
-                # Check for large content fields
-                content_size = len(document.get("content", "").encode('utf-8'))
-                if content_size > 32766:  # Azure Search term size limit
-                    print(f"Warning: Document ID {document['id']} has a content field exceeding "
-                          f"the max term size ({content_size} bytes). Consider splitting it.")
-                    continue  # Skip this document if it's too large
-                
-                # Index the document
-                response = search_client.upload_documents(documents=[document])
-
-                # Log indexing results
-                for result in response:
-                    if result.succeeded:
-                        print(f"Successfully indexed document ID {result.key}")
-                    else:
-                        print(f"Failed to index document ID {result.key}: {result.error_message}")
-
-            except json.JSONDecodeError as e:
-                print(f"JSONDecodeError for blob {blob.name}: {str(e)}")
-                continue
-            except Exception as e:
-                print(f"Error processing blob {blob.name}: {str(e)}")
-                continue
-
-    except Exception as e:
-        error_message = f"Fatal error in index_data_in_search: {str(e)}"
-        print(error_message)
-        raise Exception(error_message)
-
-    return True  # Return True if execution completes successfully
-
-if __name__ == "__main__":
-    index_data_in_search()
+# Step 5: Run Indexer
+def run_indexer(indexer_name):
+    try:
+        indexer_client.run_indexer(indexer_name)
+        print(f"Indexer '{indexer_name}' is running.")
+    except ResourceNotFoundError:
+        print(f"Indexer '{indexer_name}' not found.")
+    except HttpResponseError as e:
+        print(f"An error occurred while running the indexer: {e.message}")

@@ -4,6 +4,7 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 
+
 # Append the absolute path to src directory
 sys.path.append('/opt/airflow/src')
 
@@ -13,7 +14,7 @@ from data_pipeline.scraper import scrape_sections_up_to_current_week
 from data_pipeline.preprocess import getFileName
 from data_pipeline.preprocess import getFileNameWithoutExtension 
 from data_pipeline.azure_uploader import upload_to_blob
-from data_pipeline.index_data import index_data_in_search
+from data_pipeline.index_data import create_data_source, create_search_index, create_indexer, update_indexer, run_indexer
 
 RAW_DATA_PATH = 'data/raw'
 PROCESSED_DATA_PATH = 'data/processed/'
@@ -66,9 +67,41 @@ with DAG(
         python_callable=upload_task_func,
     )
 
-    index_task = PythonOperator(
-        task_id='index_task',
-        python_callable=index_data_in_search,
+    # Create Data Source task
+    create_data_source_task = PythonOperator(
+        task_id='create_data_source',
+        python_callable=create_data_source,
     )
-    
-    scrape_task >> preprocess_task >> blob_storage_task >> index_task
+
+    # Create Search Index task
+    create_index_task = PythonOperator(
+        task_id='create_search_index',
+        python_callable=create_search_index,
+    )
+
+    # Check Indexer Existence and Create/Update
+    def check_and_create_update_indexer():
+        try:
+            update_indexer(INDEXER_NAME)  # Try to update if exists
+            print(f"Indexer '{INDEXER_NAME}' updated successfully.")
+            return 'run_indexer'
+        except ResourceNotFoundError:
+            create_indexer(INDEXER_NAME)  # Create if it does not exist
+            print(f"Indexer '{INDEXER_NAME}' created successfully.")
+            return 'run_indexer'  # Always run the indexer afterwards
+
+    check_indexer_task = BranchPythonOperator(
+        task_id='check_indexer',
+        python_callable=check_and_create_update_indexer,
+    )
+
+    # Run Indexer task
+    run_indexer_task = PythonOperator(
+        task_id='run_indexer',
+        python_callable=lambda: run_indexer(INDEXER_NAME),
+    )
+
+    # Define dependencies
+    scrape_task >> preprocess_task >> blob_storage_task
+    blob_storage_task >> create_data_source_task >> create_index_task >> check_indexer_task
+    check_indexer_task >> run_indexer_task  # Ensure run_indexer always runs
