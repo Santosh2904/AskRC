@@ -8,7 +8,6 @@ from datetime import datetime, timedelta
 sys.path.append('/opt/airflow/src')
 
 from data_pipeline.preprocess import preprocess_data
-#from data_pipeline.dvc_tracker import track_all_data_with_dvc
 from data_pipeline.scraper import scrape_sections_up_to_current_week
 from data_pipeline.preprocess import getFileName
 from data_pipeline.preprocess import getFileNameWithoutExtension 
