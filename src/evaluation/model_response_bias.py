@@ -1,33 +1,54 @@
 import openai
 import os
 import re
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+from nltk.corpus import opinion_lexicon
 from dotenv import load_dotenv
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+
+try:
+    nltk.data.find('sentiment/vader_lexicon.zip')
+except LookupError:
+    nltk.download('vader_lexicon')
+
+try:
+    nltk.data.find('corpora/opinion_lexicon')
+except LookupError:
+    nltk.download('opinion_lexicon')
+
+# Initialize the sentiment analyzer
+sia = SentimentIntensityAnalyzer()
+
 def check_bias_in_model_response(response):
     """
-    Checks for bias in the model's response using OpenAI's moderation API.
-    Redacts flagged parts of the response if bias is detected.
-    Returns the sanitized response and a message indicating that content was redacted, if applicable.
+    Checks for biased or inappropriate language in the model's response.
+    Redacts flagged words if bias is detected.
     """
-    moderation_response = openai.Moderation.create(input=response)
-    flagged_categories = moderation_response["results"][0]["categories"]
-    flagged = moderation_response["results"][0]["flagged"]
+    # Define gendered terms and biased terms
+    gendered_terms = ["he", "she", "him", "her", "his", "hers"]
+    biased_terms = set(opinion_lexicon.negative())
+    
+    redacted_response = response  # Start with the original response
 
-    # If bias or inappropriate content is detected, redact the flagged parts
-    if flagged:
-        # Define the words/phrases associated with flagged categories to redact
-        redacted_response = response
-        for category, is_flagged in flagged_categories.items():
-            if is_flagged:
-                # Using regex to replace flagged words/phrases with "[REDACTED]"
-                redacted_response = re.sub(r'\b{}\b'.format(re.escape(category)), "[REDACTED]", redacted_response, flags=re.IGNORECASE)
-        
-        # Inform the user that some content was redacted
-        redaction_message = "Certain parts of the response were redacted due to potentially inappropriate or biased content."
-        return redacted_response, redaction_message
+    # Redact gendered terms
+    for term in gendered_terms:
+        redacted_response = re.sub(rf"\b{re.escape(term)}\b", "[REDACTED]", redacted_response, flags=re.IGNORECASE)
 
-    # If no bias is detected, return the original response with no redaction message
+    # Redact words with strong negative sentiment in the opinion lexicon
+    words = response.split()
+    for word in words:
+        if word.lower() in biased_terms:
+            sentiment_score = sia.polarity_scores(word)
+            if sentiment_score["neg"] > 0.7:  # Higher threshold to avoid false positives
+                redacted_response = re.sub(rf"\b{re.escape(word)}\b", "[REDACTED]", redacted_response, flags=re.IGNORECASE)
+
+    # Only set redaction message if actual changes were made
+    if redacted_response != response:
+        return redacted_response, "Certain parts of the response were redacted due to potentially inappropriate or biased content."
+
+    # If no redaction occurred, return the original response without a message
     return response, None
