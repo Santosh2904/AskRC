@@ -1,4 +1,4 @@
-# AskRC
+# AskRC - Research Computing RAG Chatbot
 
 ## Table of Contents
 1. [Introduction](#1-introduction)
@@ -13,6 +13,20 @@
    - [Problems](#41-problems)
    - [Current Solutions](#42-current-solutions)
    - [Proposed Solutions](#43-proposed-solutions)
+5. [Pipeline Components](#5-pipeline-components)
+   - [Data Acquisition](#51-data-acquisition)
+   - [Data Preprocessing](#52-data-preprocessing)
+   - [Integration with Azure Blob Storage](#53-integration-with-azure-blob-storage)
+   - [Azure Search Indexing](#54-azure-search-indexing)
+   - [Testing and Validation](#55-testing-and-validation)
+   - [Airflow Pipeline Orchestration](#56-airflow-pipeline-orchestration)
+6. [Data Management and Version Control](#6-data-management-and-version-control)
+   - [Data Version Control](#61-data-version-control)
+   - [Tracking and Logging](#62-tracking-and-logging)
+7. [Anomaly Detection and Alerts](#7-anomaly-detection-and-alerts)
+8. [Bias Detection](#8-bias-detection)
+
+---
 
 ## 1. Introduction
 The Research Computing Department at Northeastern University offers numerous resources to researchers, yet these offerings are underutilized due to a lack of awareness. This project aims to develop a **Retrieval-Augmented Generation (RAG)** chatbot to address these issues by providing an interactive platform where users can ask questions and receive relevant, informative responses based on existing documentation.
@@ -42,13 +56,9 @@ The dataset will primarily come from the **Research Computing Department's websi
 All public data on the Research Computing Department's website is eligible for educational use per Northeastern University's data policies. The project will ensure **FERPA compliance** and adhere to ethical web scraping practices, ensuring no personal or sensitive information is collected or processed.
 
 ## 3. GitHub Repository
-The repository will contain a `README` file, which includes essential project information such as installation instructions, usage guidelines, and details of the folder structure.
 
 ### Folder Structure
 The repository will follow this structure:
-
-![Alt text](assets/folder_structure.png)
-
 
 - **askRC (root directory):** Contains the main project components.
   - **airflow:** Configurations and DAGs for workflow automation.
@@ -78,4 +88,79 @@ The repository will follow this structure:
 - **RAG-based Chatbot:** Develop a RAG chatbot that can efficiently answer common questions related to the department's resources and services.
 - **Improved Resource Discovery:** Leverage existing information from the department's website to enhance the chatbot’s accuracy in responding to user queries, making resource discovery more efficient.
 
-#test-3
+## 5. Pipeline Components
+
+### 5.1 Data Acquisition
+The Data Acquisition component is designed to dynamically fetch data from specific sections of a website based on the current week. This is achieved through the `scraper.py` and `get_all_url.py` modules, which handle URL scraping and link gathering, respectively.
+
+1. **Section Management**:
+   - `scraper.py` defines the URLs for different sections of the website and manages the logic to scrape sections incrementally based on the current week.
+   - The `scrape_sections_up_to_current_week()` function uses the `get_current_week()` function to determine which sections to scrape, ensuring it stays within the total number of sections available.
+
+2. **Recursive Link Gathering**:
+   - The `get_all_url.py` module contains the `get_all_links()` function, which fetches all links from a given URL up to a specified depth. It recursively visits sub-links within the same domain, ensuring a thorough link gathering process without exceeding a defined depth limit to avoid overloading the crawler.
+   - By converting relative URLs to absolute URLs and using a set to track visited URLs, this function avoids duplicating links, maintaining an efficient recursive crawl within each section.
+
+3. **Data Fetching and Arrangement**:
+   - The `fetch_and_print_links()` function retrieves links for each section by calling `get_all_links()` on each URL provided. The number of links found is printed for each section to provide feedback on the volume of data captured.
+   - After links are fetched, the `arrange_scraped_data()` function organizes the data into structured directories, ensuring ease of access and reusability.
+
+### 5.2 Data Preprocessing
+The Data Preprocessing component is responsible for preparing raw text data for further processing. This involves several key steps, outlined in modular functions that ensure code reusability and clarity:
+
+1. **Text Cleaning**:
+   - The `clean_text()` function preprocesses text by converting it to lowercase, removing special characters and numbers, and excluding common English stopwords. This function enhances text quality by retaining only meaningful words.
+
+2. **Content Splitting**:
+   - The `split_content()` function splits large chunks of text into smaller parts to meet the maximum term size constraint (MAX_TERM_SIZE) for Azure Search. This is crucial for efficiently managing large data within Azure's storage limits.
+
+3. **Text File Processing**:
+   - The `preprocess_text_file()` function applies text cleaning and splitting to a single text file. It saves the cleaned and split text as separate JSON files, each with a unique ID, allowing easy identification and retrieval.
+
+4. **Batch Processing**:
+   - The `preprocess_data()` function iterates through all text files in an input folder, applying cleaning and splitting functions to each file. The processed data is stored in an output folder, with organized JSON files that are easy to access and further process.
+
+### 5.3 Integration with Azure Blob Storage
+The Azure Blob Storage Integration component facilitates the storage of preprocessed data in Azure, ensuring accessibility and durability. This is handled through functions in the `azure_uploader.py` module:
+
+- **Authentication Setup**: Azure credentials (client ID, client secret, tenant ID, and storage account URL) are loaded from environment variables using the `ClientSecretCredential` from `azure.identity`.
+- **Blob Service Client Setup**: Establish a connection to the Blob service.
+- **Container Client Access**: Access the specific container (`preprocessed-data`).
+- **File Upload to Blob Storage**: The `upload_to_blob()` function uploads preprocessed JSON files to a specified container in Azure Blob Storage.
+
+### 5.4 Azure Search Indexing
+After data is uploaded to Azure Blob Storage, we implement a data indexing process in Azure Search to facilitate efficient similarity scoring and fast search capabilities for our RAG chatbot.
+
+1. **Azure Client Setup**: Secure connections for Blob Storage and Azure Search.
+2. **Data Retrieval from Blob Storage**: Iterates over each blob in `preprocessed-data` and validates document size.
+3. **Indexing in Azure Search**: Valid documents are indexed in the specified Azure Search index (`askrcindex`), enhancing search efficiency and accuracy.
+
+### 5.5 Testing and Validation
+To ensure the robustness of our data pipeline, we use `pytest` for unit tests and GitHub Actions for continuous integration. Key components include:
+- **Data Retrieval Test**
+- **Data Format Test**
+- **Error Handling Test**
+- **Continuous Integration**: GitHub Actions automate the testing process.
+
+### 5.6 Airflow Pipeline Orchestration
+The Pipeline Orchestration component uses Airflow to manage and automate the workflow from scraping to indexing.
+
+- **DAG Configuration**: Scheduled daily, with retry logic and alerts.
+- **Task Dependencies**: `scrape_task → preprocess_task → blob_storage_task → index_task`.
+
+## 6. Data Management and Version Control
+
+### 6.1 Data Version Control
+DVC is set up to track `data/raw` and `data/processed`. Version history and collaboration are enabled through GitHub integration.
+
+### 6.2 Tracking and Logging
+Airflow’s built-in logging tracks task progress, errors, and provides alerts.
+
+## 7. Anomaly Detection and Alerts
+Automated email notifications ensure the team is alerted to any failures, enhancing pipeline reliability.
+
+## 8. Bias Detection
+Although bias detection is not mandatory due to the standardized nature of the source material, proactive measures ensure neutrality:
+1. **Sentiment Analysis**: Verifies neutral tone.
+2. **Data Slicing by Sentiment**: Allows observation of any unintentional tone patterns.
+3. **Topic Modeling and Keyword Frequency Analysis**: Ensures chatbot responses are representative of the full breadth of available information.
