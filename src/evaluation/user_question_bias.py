@@ -77,10 +77,27 @@ import re
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+# Download required NLTK resources if not already available
 try:
     nltk.data.find('sentiment/vader_lexicon.zip')
 except LookupError:
     nltk.download('vader_lexicon')
+
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
+
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab')
+
+try:
+    nltk.data.find('corpora/opinion_lexicon')
+except LookupError:
+    nltk.download('opinion_lexicon')
 
 
 # Initialize sentiment analyzer
