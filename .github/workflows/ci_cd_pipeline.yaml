@@ -23,17 +23,20 @@ jobs:
         with:
           python-version: '3.9'
       
-      #  Get the pip cache directory
-      - name: Get cache dir 
+      # Step 3: Get pip cache directory dynamically
+      - name: Get pip cache directory
         id: pip-cache-dir
         run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
-      
-      # Cache pip dependencies
+
+      # Step 4: Use actions/cache to cache pip dependencies
       - name: Cache pip dependencies
         uses: actions/cache@v4
         with:
-          path: ${{ steps.pip-cache-dir.outputs.dir}}
+          # Use the pip cache directory from the previous step
+          path: ${{ steps.pip-cache-dir.outputs.dir }}
+          # Generate a unique cache key based on OS and requirements.txt hash
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          # Allow fallback to other caches with the same prefix
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -58,7 +61,7 @@ jobs:
       #       --src-path /path/to/deployment.zip
           
 
-      # Run the RAG Chatbot App (if required post-deployment)
-      - name: Run the AskRC Application
-        run: |
-          streamlit run app.py --server.headless true
+      # # Run the RAG Chatbot App (if required post-deployment)
+      # - name: Run the AskRC Application
+      #   run: |
+      #     streamlit run app.py --server.headless true
