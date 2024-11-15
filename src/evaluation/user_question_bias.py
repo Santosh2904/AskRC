@@ -77,8 +77,16 @@ import re
 import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 
+try:
+    nltk.data.find('sentiment/vader_lexicon.zip')
+except LookupError:
+    nltk.download('vader_lexicon')
+
+
 # Initialize sentiment analyzer
 sia = SentimentIntensityAnalyzer()
+
+
 
 # Mapping of gendered terms to neutral terms
 gender_neutral_map = {
