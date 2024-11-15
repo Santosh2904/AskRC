@@ -9,3 +9,8 @@ azure-storage-blob
 azure-identity
 python-dotenv
 azure-search-documents
+openai
+nltk
+spacy
+pandas
+scipy

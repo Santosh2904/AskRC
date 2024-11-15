@@ -16,7 +16,6 @@ from data_pipeline.index_data import index_data_in_search
 
 RAW_DATA_PATH = 'data/raw'
 PROCESSED_DATA_PATH = 'data/processed/'
-#TRACK_DATA_PATH = 'data'
 
 default_args = {
     'owner': 'santosh',
