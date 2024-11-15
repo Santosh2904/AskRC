@@ -3,10 +3,10 @@ name: CI/CD Pipeline for AskRC
 on:
   push:
     branches:
-      - main
+      - "*"
   pull_request:
     branches:
-      - main
+      - "*"
 
 jobs:
   build-and-deploy:
@@ -22,6 +22,20 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
+      
+      #  Get the pip cache directory
+      - name: Get cache dir 
+        id: pip-cache-dir
+        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+      
+      # Cache pip dependencies
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pip-cache-dir.outputs.dir}}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       # Install dependencies
       - name: Install dependencies
@@ -33,21 +47,18 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CLIENT_ID }} 
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          credentials_json: '${{ secrets.AZURE_SECRETS }}'
 
-      # Deploy to Azure
-      - name: Deploy to Azure Function
-        run: |
-          az functionapp deployment source config-zip \
-            -g RESOURCE_GROUP_NAME \
-            -n FUNCTION_APP_NAME \
-            --src-path /path/to/deployment.zip
+      # # Deploy to Azure
+      # - name: Deploy to Azure Function
+      #   run: |
+      #     az functionapp deployment source config-zip \
+      #       -g RESOURCE_GROUP_NAME \
+      #       -n FUNCTION_APP_NAME \
+      #       --src-path /path/to/deployment.zip
           
 
       # Run the RAG Chatbot App (if required post-deployment)
       - name: Run the AskRC Application
         run: |
-          python app.py
+          streamlit run app.py --server.headless true
