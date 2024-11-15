@@ -47,7 +47,7 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          credentials_json: '${{ secrets.AZURE_SECRETS }}'
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # # Deploy to Azure
       # - name: Deploy to Azure Function
