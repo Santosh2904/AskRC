@@ -1,0 +1,53 @@
+name: CI/CD Pipeline for AskRC
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      # Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Login to Azure CLI
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CLIENT_ID }} 
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      # Deploy to Azure
+      - name: Deploy to Azure Function
+        run: |
+          az functionapp deployment source config-zip \
+            -g RESOURCE_GROUP_NAME \
+            -n FUNCTION_APP_NAME \
+            --src-path /path/to/deployment.zip
+          
+
+      # Run the RAG Chatbot App (if required post-deployment)
+      - name: Run the AskRC Application
+        run: |
+          python app.py
