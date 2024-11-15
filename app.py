@@ -11,6 +11,7 @@ from src.model.system_prompt import create_system_prompt
 from src.model.get_model_response import get_openai_response
 from src.evaluation.user_question_bias import check_bias_in_user_question
 from src.evaluation.model_response_bias import check_bias_in_model_response
+from src.evaluation.answer_validation import key_concept_match 
 
 # Load environment variables from .env file
 load_dotenv()
@@ -42,13 +43,16 @@ def main():
                 # Step 5: Check for bias in the model response
                 answer_clean, response_bias_message = check_bias_in_model_response(answer)
                 
-                # Display the final answer and any redaction notice if applicable
-                st.write(answer_clean)
-                if response_bias_message:
-                    st.warning(response_bias_message)
+                # Step 6: Validate answer relevance using key concept match
+                if key_concept_match(answer_clean, context):
+                    st.write(answer_clean)
+                    if response_bias_message:
+                        st.warning(response_bias_message)
+                    else:
+                        st.success("Answer provided.")
                 else:
-                    st.success("Done")
+                    st.warning("The answer lacks sufficient contextual relevance.")
 
+# Run the app
 if __name__ == "__main__":
     main()
-

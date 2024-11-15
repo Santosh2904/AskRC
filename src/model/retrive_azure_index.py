@@ -18,7 +18,7 @@ search_client = SearchClient(
 
 def search_azure_index(query):
     """Retrieves top relevant documents from Azure Search and prepares them for OpenAI prompt."""
-    results = search_client.search(search_text=query, top=3)
+    results = search_client.search(search_text=query, top=8)
     # Extract relevant information from search results
     context = "\n\n".join([doc['content'] for doc in results if 'content' in doc]) if results else "No relevant information found."
     # Return the extracted context
