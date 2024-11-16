@@ -15,6 +15,9 @@ from src.evaluation.model_response_bias import check_bias_in_model_response
 from src.evaluation.answer_validation import key_concept_match 
 from src.model.alerts import send_slack_alert
 # Load environment variables from .env file
+import nltk
+nltk.download('punkt')  # Downloads the 'punkt' tokenizer
+nltk.download('punkt_tab')  # Downloads the specific 'punkt_tab' tokenizer if needed
 load_dotenv()
 
 # Email alert function (you can integrate any email provider like SendGrid or use SMTP)
@@ -85,3 +88,5 @@ def main():
 # Run the app
 if __name__ == "__main__":
     main()
+
+#commnet 
