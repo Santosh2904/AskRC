@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/rakshithdharmappa/Library/CloudStorage/OneDrive-Personal/code/MLops/AskRC/mlruns/0/21e91d1661664ea39edd79fcf9145d4f/artifacts
+end_time: 1731723957271
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 21e91d1661664ea39edd79fcf9145d4f
+run_name: retrieve_azure_index
+run_uuid: 21e91d1661664ea39edd79fcf9145d4f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1731723957165
+status: 3
+tags: []
+user_id: rakshithdharmappa

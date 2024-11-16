@@ -1,12 +1,16 @@
-from email.mime.text import MIMEText
 import os
-import openai
 import time
+import smtplib
+from email.mime.text import MIMEText
 import streamlit as st
+from dotenv import load_dotenv
+import nltk
+
+# Azure Search Imports
 from azure.search.documents import SearchClient
 from azure.core.credentials import AzureKeyCredential
-from dotenv import load_dotenv
 
+# Custom Module Imports
 from src.model.retrive_azure_index import search_azure_index
 from src.model.system_prompt import create_system_prompt
 from src.model.get_model_response import get_openai_response
@@ -14,28 +18,39 @@ from src.evaluation.user_question_bias import check_bias_in_user_question
 from src.evaluation.model_response_bias import check_bias_in_model_response
 from src.evaluation.answer_validation import key_concept_match 
 from src.model.alerts import send_slack_alert
-# Load environment variables from .env file
-import nltk
-nltk.download('punkt')  # Downloads the 'punkt' tokenizer
-nltk.download('punkt_tab')  # Downloads the specific 'punkt_tab' tokenizer if needed
+
+# Initialize environment variables
 load_dotenv()
 
-# Email alert function (you can integrate any email provider like SendGrid or use SMTP)
-def send_email_alert(subject, body):
-    sender_email = os.getenv("SENDER_EMAIL")  # Sender's email
-    receiver_emails = os.getenv("EMAIL_TO").split(',')  # List of recipient emails
-    app_password = os.getenv("EMAIL_APP_PASSWORD")  # App Password or regular password
-    smtp_server = os.getenv("SMTP_SERVER")  # SMTP server from .env
-    smtp_port = int(os.getenv("SMTP_PORT"))  # SMTP port from .env
+# Download NLTK data
+nltk.download('punkt')  # Tokenizer
+nltk.download('punkt_tab')  # Additional tokenizer (if needed)
 
-    # Set up the MIME
+# Retrieve Slack Webhook URL from environment variables
+SLACK_WEBHOOK_URL = os.getenv("SLACK_WEBHOOK_URL")
+if not SLACK_WEBHOOK_URL:
+    raise ValueError("SLACK_WEBHOOK_URL is not set in the environment.")
+
+# Email alert function
+def send_email_alert(subject, body):
+    """
+    Sends an email alert using SMTP.
+    """
+    # Environment variables for email configuration
+    sender_email = os.getenv("SENDER_EMAIL")
+    receiver_emails = os.getenv("EMAIL_TO").split(',')
+    app_password = os.getenv("EMAIL_APP_PASSWORD")
+    smtp_server = os.getenv("SMTP_SERVER")
+    smtp_port = int(os.getenv("SMTP_PORT"))
+
+    # Compose the email
     msg = MIMEText(body, 'plain')
     msg['From'] = sender_email
     msg['To'] = ', '.join(receiver_emails)
     msg['Subject'] = subject
 
     try:
-        # Connect to the SMTP server with the configured server and port
+        # Connect to SMTP server
         with smtplib.SMTP_SSL(smtp_server, smtp_port) if smtp_port == 465 else smtplib.SMTP(smtp_server, smtp_port) as server:
             if smtp_port == 587:
                 server.starttls()
@@ -46,9 +61,13 @@ def send_email_alert(subject, body):
         print(f"Error sending email alert: {e}")
 
 def main():
+    """
+    Main function to run the AskRC Streamlit application.
+    """
     st.set_page_config(page_title="AskRC", page_icon="🎓")
     st.header("AskRC 🎓")
 
+    # User input: Ask a question
     user_question = st.text_input("Ask a Question")
 
     if st.button("Get Answer"):
@@ -57,9 +76,12 @@ def main():
             user_question_clean, bias_message = check_bias_in_user_question(user_question)
             
             if bias_message:
-                # Display rephrase suggestion if bias is detected
+                # Notify user about bias and send an email alert
                 st.warning(bias_message)
-                send_email_alert("Bias detected in user question", f"The user question contains bias: {user_question_clean}. Bias message: {bias_message}")
+                send_email_alert(
+                    "Bias detected in user question",
+                    f"The user question contains bias: {user_question_clean}. Bias message: {bias_message}"
+                )
             else:
                 # Step 2: Retrieve context from Azure Search
                 context = search_azure_index(user_question_clean)
@@ -75,18 +97,26 @@ def main():
                 
                 # Step 6: Validate answer relevance using key concept match
                 if key_concept_match(answer_clean, context):
+                    # Display the final answer
                     st.write(answer_clean)
+
                     if response_bias_message:
+                        # Notify about bias in the model response and send a Slack alert
                         st.warning(response_bias_message)
-                        send_slack_alert("Bias detected in model response", f"Bias message in the model response: {response_bias_message}")
+                        send_slack_alert(
+                            "Bias detected in model response",
+                            f"Bias message in the model response: {response_bias_message}"
+                        )
                     else:
                         st.success("Answer provided.")
                 else:
+                    # Notify about insufficient contextual relevance and send a Slack alert
                     st.warning("The answer lacks sufficient contextual relevance.")
-                    send_slack_alert("Answer lacks context", f"The answer provided lacks sufficient contextual relevance: {answer_clean}")
+                    send_slack_alert(
+                        "Answer lacks context",
+                        f"The answer provided lacks sufficient contextual relevance: {answer_clean}"
+                    )
 
-# Run the app
+# Entry point
 if __name__ == "__main__":
     main()
-
-#commnet 

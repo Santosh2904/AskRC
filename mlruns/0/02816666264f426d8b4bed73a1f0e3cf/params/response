@@ -1,0 +1,7 @@
+Discovery is the high-performance computing (HPC) cluster at Northeastern University. It is a centralized computing resource located at the Massachusetts Green High-Performance Computing Center (MGHPCC) in Holyoke. Discovery provides access to a large number of CPU cores and GPUs for faculty and students at Northeastern University free of charge.
+
+The cluster offers hardware resources from various CPU microarchitectures, including Intel Xeon and AMD Zen architectures, as well as NVIDIA GPUs like Pascal, Volta, Turing, T4, and A100. These resources are connected to the university network, enabling high-speed data transfer and interaction with the computing environment.
+
+Discovery is essential for researchers and students who require computational resources for their projects and experiments. It supports various software applications, different packages like MPI, R, and Matlab, and provides tools for data management, job scheduling, and monitoring. Researchers can use Discovery for a wide range of tasks, including running simulations, data analysis, and other compute-intensive activities that require significant computational power and resources.
+
+In summary, Discovery is a high-performance computing cluster that facilitates advanced computational research and supports a wide range of scientific and technical activities at Northeastern University.
