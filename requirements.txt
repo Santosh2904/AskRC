@@ -9,8 +9,9 @@ azure-storage-blob
 azure-identity
 python-dotenv
 azure-search-documents
-openai
+openai==0.28
 nltk
 spacy
 pandas
 scipy
+streamlit
