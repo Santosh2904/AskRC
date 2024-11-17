@@ -8,4 +8,4 @@ askrc/
 __pycache__/
 .env
 src/data_pipeline/.env
-src/model/.env
+src/model/.env.env

@@ -18,6 +18,7 @@ from src.evaluation.user_question_bias import check_bias_in_user_question
 from src.evaluation.model_response_bias import check_bias_in_model_response
 from src.evaluation.answer_validation import key_concept_match 
 from src.model.alerts import send_slack_alert
+from mlflow.config import MLFLOW_TRACKING_URI, SLACK_WEBHOOK_URL
 
 # Initialize environment variables
 load_dotenv()
