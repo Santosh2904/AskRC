@@ -1,0 +1,6 @@
+[core]
+    remote = dvc_azure_remote
+['remote "dvc_azure_remote"']
+    url = azure://preprocessed-data
+    account_name = rcragchatbot
+    account_key = 9tC/Bs71rC306UV0/+Oj3iFotqLTuBXKZRwcQb95jXscRYX8rTezypn6H9mU6nvSqYluLirI4sbn+ASt6ih4JQ==
