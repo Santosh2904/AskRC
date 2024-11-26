@@ -17,6 +17,20 @@ from src.model.alerts import send_slack_alert
 # Load environment variables from .env file
 load_dotenv()
 
+# Trigger Airflow DAG function
+def trigger_airflow_dag(user_question):
+    """
+    Trigger Airflow DAG using the Airflow CLI.
+    """
+    dag_id = "response_generation_pipeline"  # Replace with your DAG ID if different
+    conf = f"{{'user_question': '{user_question}'}}"  # Pass the user question as conf
+    command = f"airflow dags trigger {dag_id} -c '{conf}'"  # CLI command to trigger the DAG
+    exit_code = os.system(command)  # Execute the command
+    if exit_code == 0:
+        st.success("DAG triggered successfully!")
+    else:
+        st.error("Failed to trigger DAG. Check Airflow logs for details.")
+
 # Email alert function (you can integrate any email provider like SendGrid or use SMTP)
 def send_email_alert(subject, body):
     sender_email = os.getenv("SENDER_EMAIL")  # Sender's email
@@ -50,6 +64,8 @@ def main():
 
     if st.button("Get Answer"):
         with st.spinner("Processing..."):
+            # Trigger the Airflow DAG
+            #trigger_airflow_dag(user_question)
             # Step 1: Check for bias in the user question
             user_question_clean, bias_message = check_bias_in_user_question(user_question)
             
