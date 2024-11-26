@@ -10,3 +10,4 @@ __pycache__/
 src/data_pipeline/.env
 src/model/.env
 askrc-env/
+.dvc/config.local

@@ -1,0 +1,8 @@
+[core]
+    remote = dvc_azure_remote
+['remote "data/raw"']
+    url = ../data/processed
+['remote "dvc_azure_remote"']
+    url = azure://preprocessed-data
+    account_name = ${AZURE_STORAGE_ACCOUNT}
+    account_key = ${AZURE_BLOB_KEY}
