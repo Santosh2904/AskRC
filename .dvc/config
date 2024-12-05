@@ -4,5 +4,5 @@
     url = ../data/processed
 ['remote "dvc_azure_remote"']
     url = azure://preprocessed-data
-    account_name = ${AZURE_STORAGE_ACCOUNT}
-    account_key = ${AZURE_BLOB_KEY}
+    account_name = rcragchatbot
+    account_key = 9tC/Bs71rC306UV0/+Oj3iFotqLTuBXKZRwcQb95jXscRYX8rTezypn6H9mU6nvSqYluLirI4sbn+ASt6ih4JQ==
