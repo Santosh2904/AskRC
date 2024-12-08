@@ -7,7 +7,7 @@ It provides a function to upload files to a specified container in Azure Blob St
 import os
 from dotenv import load_dotenv
 import datetime
-from ..config.mlflow_config import *
+from config.mlflow_config import *
 collector = MetricsCollector()
 
 load_dotenv()

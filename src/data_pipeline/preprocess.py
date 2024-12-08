@@ -5,8 +5,8 @@ import uuid
 import nltk
 from nltk.corpus import stopwords
 from datetime import datetime
-import logging
-from .schema_drift_detection import detect_schema_drift
+from data_pipeline.schema_drift_detection import detect_schema_drift
+
 
 try:
     from .azure_uploader import upload_to_blob

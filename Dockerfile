@@ -23,6 +23,8 @@ USER airflow
 
 # Upgrade pip, setuptools, and wheel
 RUN pip install --upgrade pip setuptools wheel
+RUN pip install apache-airflow
+RUN pip install --no-cache-dir openai
 
 # Copy requirements
 COPY requirements.txt /requirements.txt
