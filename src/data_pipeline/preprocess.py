@@ -5,7 +5,7 @@ import uuid
 import nltk
 from nltk.corpus import stopwords
 from datetime import datetime
-from data_pipeline.schema_drift_detection import detect_schema_drift
+from src.data_pipeline.schema_drift_detection import detect_schema_drift
 
 
 try:

@@ -3,6 +3,7 @@ import sys
 import os
 from unittest.mock import patch, MagicMock
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname("/Users/aksharareddypatlannagari/Documents/GitHub/AskRC/src"),
 # Get the absolute path to the project root directory
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_root)
