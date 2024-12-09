@@ -6,18 +6,17 @@ import streamlit as st
 from azure.search.documents import SearchClient
 from azure.core.credentials import AzureKeyCredential
 from dotenv import load_dotenv
-from src.config.mlflow_config import MetricsCollector
-from src.model.retrive_azure_index import search_azure_index
-from src.model.system_prompt import create_system_prompt
-from src.model.get_model_response import get_openai_response
-from src.evaluation.user_question_bias import check_bias_in_user_question
-from src.evaluation.model_response_bias import check_bias_in_model_response
-from src.evaluation.answer_validation import key_concept_match 
-from src.model.alerts import send_slack_alert
+from config.mlflow_config import MetricsCollector
+from model.retrive_azure_index import search_azure_index
+from model.system_prompt import create_system_prompt
+from model.get_model_response import get_openai_response
+from evaluation.user_question_bias import check_bias_in_user_question
+from evaluation.model_response_bias import check_bias_in_model_response
+from evaluation.answer_validation import key_concept_match 
+from model.alerts import send_slack_alert
 # Load environment variables from .env file
 load_dotenv()
 collector = MetricsCollector()
-
 
 def main():
     st.set_page_config(page_title="AskRC", page_icon="🎓")
@@ -31,6 +30,7 @@ def main():
             #trigger_airflow_dag(user_question)
             # Step 1: Check for bias in the user question
             user_question_clean, bias_message = check_bias_in_user_question(user_question)
+            st.write("step1:",user_question_clean, bias_message)
             
             if bias_message:
                 # Display rephrase suggestion if bias is detected
@@ -39,15 +39,19 @@ def main():
             else:
                 # Step 2: Retrieve context from Azure Search
                 context = search_azure_index(user_question_clean)
+                st.write("step2:",context)
                 
                 # Step 3: Create the system prompt
                 system_prompt = create_system_prompt(context, user_question_clean)
+                st.write("step3:",system_prompt)
                 
                 # Step 4: Get response from OpenAI API
                 answer = get_openai_response(system_prompt)
+                st.write("step4:",answer)
                 
                 # Step 5: Check for bias in the model response
                 answer_clean, response_bias_message = check_bias_in_model_response(answer)
+                st.write(answer_clean)
                 
                 # Step 6: Validate answer relevance using key concept match
                 if key_concept_match(answer_clean, context):

@@ -5,7 +5,7 @@ import nltk
 import spacy
 from nltk.sentiment import SentimentIntensityAnalyzer
 from dotenv import load_dotenv
-from ..config.mlflow_config import *
+from config.mlflow_config import *
 collector = MetricsCollector()
 # Load environment variables
 load_dotenv()

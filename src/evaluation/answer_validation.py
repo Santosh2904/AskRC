@@ -2,9 +2,11 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk import download
-from ..config.mlflow_config import *
+from config.mlflow_config import *
+import sys
 collector = MetricsCollector()
 
+sys.path.append('/opt/airflow/src')
 # Ensure necessary NLTK resources are available
 download('punkt')
 download('stopwords')

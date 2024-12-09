@@ -1,7 +1,6 @@
 import time
 import os
 import openai
-from openai.error import RateLimitError, OpenAIError
 
 # Set OpenAI API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -40,14 +39,13 @@ def get_openai_response(prompt, retries=5, delay=10):
             # Return the AI-generated response
             return response['choices'][0]['message']['content'].strip()
 
-        except RateLimitError:
+        except openai.error.RateLimitError:
             print(f"Rate limit exceeded. Retrying in {delay} seconds (Attempt {attempt} of {retries})...")
         
-        except OpenAIError as e:
+        except openai.error.OpenAIError as e:
             # Handle generic OpenAI API errors
-            print(f"An error occurred: {str(e)}")
-            break
-
+                print(f"An error occurred: {str(e)}")
+                break
+ 
     # If retries are exhausted
     return "Request failed after multiple attempts due to rate limit or API issues."
-
